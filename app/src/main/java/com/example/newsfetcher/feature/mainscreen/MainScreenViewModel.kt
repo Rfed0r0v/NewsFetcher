@@ -1,5 +1,6 @@
 package com.example.newsfetcher.feature.mainscreen
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.newsfetcher.base.BaseViewModel
 import com.example.newsfetcher.base.Event
@@ -19,12 +20,12 @@ class MainScreenViewModel(private val interactor: ArticlesInteractor) : BaseView
         when (event) {
             is DataEvent.LoadArticles -> {
                 viewModelScope.launch {
-                    interactor.getArticles().fold(onError = {
-
-                    }, onSuccess = {
-                        processDataEvent(DataEvent.OnLoadArticlesSucceed(it))
-
-                    })
+                    interactor.getArticles().fold(
+                        onError = {
+                                  Log.e("ERROR",it.localizedMessage)
+                        }, onSuccess = {
+                            processDataEvent(DataEvent.OnLoadArticlesSucceed(it))
+                        })
                 }
                 return null
             }
@@ -34,5 +35,4 @@ class MainScreenViewModel(private val interactor: ArticlesInteractor) : BaseView
             else -> return null
         }
     }
-
 }
