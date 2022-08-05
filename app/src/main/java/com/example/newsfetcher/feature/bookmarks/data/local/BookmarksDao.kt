@@ -7,14 +7,14 @@ import com.example.newsfetcher.feature.bookmarks.di.BOOKMARKS_TABLE
 @Dao
 interface BookmarksDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun create(entity: BookmarkEntity)
+    suspend fun create(entity: BookmarkEntity)
 
     @Query("SELECT * FROM $BOOKMARKS_TABLE")
-    fun read(): List<BookmarkEntity>
+    suspend fun read(): List<BookmarkEntity>
 
     @Update
-    fun update(entity: BookmarkEntity)
+    suspend fun update(entity: BookmarkEntity)
 
     @Delete
-    fun delete(entity: BookmarkEntity)
+    suspend fun delete(entity: BookmarkEntity)
 }

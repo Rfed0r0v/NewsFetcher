@@ -5,11 +5,11 @@ import com.example.newsfetcher.feature.domain.ArticleModel
 
 interface BookmarksRepository {
 
-    fun create(entity: ArticleModel)
+    suspend fun create(model: ArticleModel)
 
-    fun read(): List<ArticleModel>
+    suspend fun read(): List<ArticleModel>
 
-    fun update(entity: ArticleModel)
+   suspend fun update(model: ArticleModel)
 
-    fun delete(entity: ArticleModel)
+    suspend fun delete(model: ArticleModel)
 }

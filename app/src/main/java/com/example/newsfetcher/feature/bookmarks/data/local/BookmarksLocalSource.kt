@@ -3,19 +3,19 @@ package com.example.newsfetcher.feature.bookmarks.data.local
 import com.example.newsfetcher.feature.bookmarks.data.local.model.BookmarkEntity
 
 class BookmarksLocalSource(private val bookmarksDao: BookmarksDao) {
-    fun create(entity: BookmarkEntity) {
+    suspend fun create(entity: BookmarkEntity) {
         bookmarksDao.create(entity)
     }
 
-    fun read(): List<BookmarkEntity> {
+    suspend fun read(): List<BookmarkEntity> {
         return bookmarksDao.read()
     }
 
-    fun update(entity: BookmarkEntity) {
+    suspend fun update(entity: BookmarkEntity) {
         bookmarksDao.update(entity)
     }
 
-    fun delete(entity: BookmarkEntity) {
+    suspend fun delete(entity: BookmarkEntity) {
         bookmarksDao.delete(entity)
     }
 }
