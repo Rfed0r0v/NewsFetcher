@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.example.newsfetcher.feature.bookmarks.di.BOOKMARKS_TABLE
 
 @Entity(tableName = BOOKMARKS_TABLE)
+
 data class BookmarkEntity(
     @PrimaryKey
     @ColumnInfo(name = "url")
@@ -18,4 +19,6 @@ data class BookmarkEntity(
     val author: String,
     @ColumnInfo(name = "urlToImage")
     val urlToImage: String,
+    @ColumnInfo(name = "publishedAt")
+    val publishedAt: String
 )
