@@ -18,7 +18,11 @@ class MainScreenViewModel(
         processDataEvent(DataEvent.LoadArticles)
     }
 
-    override fun initialViewState(): ViewState = ViewState(articles = emptyList())
+    override fun initialViewState(): ViewState = ViewState(
+        articleList = emptyList(),
+        articlesShown = emptyList(),
+        isSearchEnabled = false
+    )
 
     override fun reduce(event: Event, previousState: ViewState): ViewState? {
         when (event) {
@@ -34,13 +38,26 @@ class MainScreenViewModel(
                 return null
             }
             is DataEvent.OnLoadArticlesSucceed -> {
-                return previousState.copy(articles = event.articles)
+                return previousState.copy(
+                    articleList = event.articles,
+                    articlesShown = event.articles
+                )
             }
             is UiEvent.OnArticleClicked -> {
                 viewModelScope.launch {
-                    bookmarksInteractor.create(previousState.articles[event.index])
+                    bookmarksInteractor.create(previousState.articlesShown[event.index])
                 }
                 return null
+            }
+            is UiEvent.OnSearchButtonClicked -> {
+                return previousState.copy(isSearchEnabled = !previousState.isSearchEnabled)
+            }
+            is UiEvent.OnSearchEdit -> {
+                return previousState.copy(articlesShown = previousState.articleList.filter {
+                    it.title.contains(
+                        event.text
+                    )
+                })
             }
             else -> return null
         }

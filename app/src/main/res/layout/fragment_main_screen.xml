@@ -32,11 +32,13 @@
             android:layout_width="8dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:inputType="text"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/ivSearch"
             app:layout_constraintEnd_toStartOf="@+id/ivSearch"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ivSearch" />
+            app:layout_constraintTop_toTopOf="@+id/ivSearch"
+            />
 
         <ImageView
             android:id="@+id/ivSearch"

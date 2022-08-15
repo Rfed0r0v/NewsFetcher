@@ -1,7 +1,13 @@
 package com.example.newsfetcher.feature.mainscreen
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfetcher.R
@@ -12,9 +18,16 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
 
     private val viewModel: MainScreenViewModel by viewModel()
     private val recyclerView: RecyclerView by lazy { requireActivity().findViewById(R.id.rvArticles) }
+    private val ivSearch: ImageView by lazy { requireActivity().findViewById(R.id.ivSearch) }
+    private val tvTitle: TextView by lazy { requireActivity().findViewById(R.id.tvTitle) }
+    private val etSearch: EditText by lazy { requireActivity().findViewById(R.id.etSearch) }
     private val adapter: ArticlesAdapter by lazy {
         ArticlesAdapter() { index ->
-            viewModel.processUiEvent(com.example.newsfetcher.feature.mainscreen.UiEvent.OnArticleClicked(index))
+            viewModel.processUiEvent(
+                com.example.newsfetcher.feature.mainscreen.UiEvent.OnArticleClicked(
+                    index
+                )
+            )
         }
     }
 
@@ -22,9 +35,39 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.viewState.observe(viewLifecycleOwner, ::render)
         recyclerView.adapter = adapter
+
+        ivSearch.setOnClickListener {
+            viewModel.processUiEvent(com.example.newsfetcher.feature.mainscreen.UiEvent.OnSearchButtonClicked)
+        }
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                text: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(text: Editable?) {
+                viewModel.processUiEvent(
+                    com.example.newsfetcher.feature.mainscreen.UiEvent.OnSearchEdit(
+                        text.toString()
+                    )
+                )
+
+            }
+
+        }
+
+        )
     }
 
     private fun render(viewState: ViewState) {
-        adapter.setData(viewState.articles)
+        tvTitle.isVisible = !viewState.isSearchEnabled
+        etSearch.isVisible = viewState.isSearchEnabled
+        adapter.setData(viewState.articlesShown)
     }
 }
