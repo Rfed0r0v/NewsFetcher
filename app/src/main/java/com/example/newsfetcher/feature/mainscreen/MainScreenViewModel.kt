@@ -50,7 +50,10 @@ class MainScreenViewModel(
                 return null
             }
             is UiEvent.OnSearchButtonClicked -> {
-                return previousState.copy(isSearchEnabled = !previousState.isSearchEnabled)
+                return previousState.copy(
+                    articlesShown = if (previousState.isSearchEnabled) previousState.articleList else previousState.articlesShown,
+                    isSearchEnabled = !previousState.isSearchEnabled
+                )
             }
             is UiEvent.OnSearchEdit -> {
                 return previousState.copy(articlesShown = previousState.articleList.filter {
