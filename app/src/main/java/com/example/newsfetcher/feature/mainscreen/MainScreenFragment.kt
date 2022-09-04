@@ -23,9 +23,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
     private val adapter: ArticlesAdapter by lazy {
         ArticlesAdapter() { index ->
             viewModel.processUiEvent(
-                com.example.newsfetcher.feature.mainscreen.UiEvent.OnArticleClicked(
-                    index
-                )
+                com.example.newsfetcher.feature.mainscreen.UiEvent.OnArticleClicked(index)
             )
         }
     }
@@ -56,12 +54,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
                         text.toString()
                     )
                 )
-
             }
-
-        }
-
-        )
+        })
     }
 
     private fun render(viewState: ViewState) {
