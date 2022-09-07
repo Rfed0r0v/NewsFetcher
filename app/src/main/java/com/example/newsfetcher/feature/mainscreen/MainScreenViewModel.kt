@@ -1,8 +1,14 @@
 package com.example.newsfetcher.feature.mainscreen
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
+import android.view.View
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewModelScope
+import com.example.newsfetcher.MainActivity
 import com.example.newsfetcher.R
+import com.example.newsfetcher.SecondActivity
 import com.example.newsfetcher.base.BaseViewModel
 import com.example.newsfetcher.base.Event
 import com.example.newsfetcher.feature.bookmarks.domain.BookmarksInteractor
@@ -45,11 +51,15 @@ class MainScreenViewModel(
                 )
             }
             is UiEvent.OnArticleClicked -> {
-                viewModelScope.launch {
-                    bookmarksInteractor.create(previousState.articlesShown[event.index])
-                }
-                return null
+               // viewModelScope.launch {
+               //     bookmarksInteractor.create(previousState.articlesShown[event.index])
+                //}
+                val intent = Intent(MainActivity::class as Context,SecondActivity::class.java)
+                startActivity(MainActivity::class as Context,intent,null)
+
+            return null
             }
+
             is UiEvent.OnSearchButtonClicked -> {
                 return previousState.copy(
                     articlesShown = if (previousState.isSearchEnabled) previousState.articleList else previousState.articlesShown,
