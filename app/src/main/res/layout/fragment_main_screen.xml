@@ -17,12 +17,12 @@
 
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:text="@string/app_name"
+            android:text="Введите текст для поиска"
             android:textSize="16sp"
-            android:textColor="@color/purple_200"
+            android:textColor="?attr/colorPrimary"
             app:layout_constraintBottom_toBottomOf="@id/ivSearch"
             app:layout_constraintEnd_toStartOf="@id/ivSearch"
             app:layout_constraintStart_toStartOf="parent"
