@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.newsfetcher.di.databaseModule
 import com.example.newsfetcher.di.networkModule
 import com.example.newsfetcher.feature.bookmarks.di.bookmarksModule
+import com.example.newsfetcher.feature.detailednews.di.infoScreenModule
 import com.example.newsfetcher.feature.di.mainScreenModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -15,7 +16,9 @@ class App : Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(networkModule, mainScreenModule, bookmarksModule, databaseModule)
+            modules(
+                networkModule, mainScreenModule, bookmarksModule, databaseModule,infoScreenModule
+            )
         }
     }
 }

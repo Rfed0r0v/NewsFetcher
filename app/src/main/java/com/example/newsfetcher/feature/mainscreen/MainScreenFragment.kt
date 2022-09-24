@@ -11,6 +11,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfetcher.R
+import com.example.newsfetcher.di.BUNDLE_KEY_FOR_ARTICLE_MODEL
+import com.example.newsfetcher.feature.detailednews.ui.DetailedNewsFragment
+import com.example.newsfetcher.feature.detailednews.ui.DetailedNewsFragment.Companion.newInstance
+import com.example.newsfetcher.feature.detailednews.ui.DetailedNewsViewModel
+import com.example.newsfetcher.feature.domain.ArticleModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
@@ -21,11 +26,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
     private val tvTitle: TextView by lazy { requireActivity().findViewById(R.id.tvTitle) }
     private val etSearch: EditText by lazy { requireActivity().findViewById(R.id.etSearch) }
     private val adapter: ArticlesAdapter by lazy {
-        ArticlesAdapter() { index ->
-            viewModel.processUiEvent(
-                com.example.newsfetcher.feature.mainscreen.UiEvent.OnArticleClicked(index)
-            )
-        }
+        ArticlesAdapter(
+            { currentArticle -> openArticle(currentArticle) },
+            { index -> viewModel.processUiEvent(UiEvent.OnArticleClicked(index)) }
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,5 +66,13 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         tvTitle.isVisible = !viewState.isSearchEnabled
         etSearch.isVisible = viewState.isSearchEnabled
         adapter.setData(viewState.articlesShown)
+    }
+
+    private fun openArticle(currentArticle: ArticleModel) {
+        val bundle = Bundle()
+        bundle.putParcelable(BUNDLE_KEY_FOR_ARTICLE_MODEL, currentArticle)
+        parentFragmentManager.beginTransaction().add(
+            R.id.container, DetailedNewsFragment.newInstance(bundle)
+        ).commit()
     }
 }
