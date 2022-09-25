@@ -16,7 +16,7 @@
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="?attr/actionModeSplitBackground"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -41,8 +41,8 @@
 
                     <ImageView
                         android:id="@+id/btnBackFromArticleScreen"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
@@ -63,7 +63,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
+            android:background="?attr/actionModeSplitBackground">
 
             <TextView
                 android:id="@+id/tvArticleTitle"
@@ -74,6 +74,7 @@
                 android:layout_marginEnd="16dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor = "?attr/editTextColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +88,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textStyle="italic"
+                android:textColor = "?attr/editTextColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +102,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textSize="18sp"
+                android:textColor = "?attr/editTextColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvArticleDescription" />
@@ -111,7 +114,8 @@
                 android:layout_marginStart="16dp"
                 android:autoLink="web"
                 android:gravity="start"
-                android:textColor="@color/cardview_dark_background"
+                android:textColor="@color/teal_700"
+                android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="@+id/tvArticleContent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvArticleContent" />

@@ -14,9 +14,9 @@ val mainScreenModule = module {
     single<NewsApi> {
         get<Retrofit>().create(NewsApi::class.java)
     }
-    single<ArticlesRemoteSource> { ArticlesRemoteSource(api = get()) }
+    single { ArticlesRemoteSource(api = get()) }
     single<ArticlesRepository> { ArticlesRepositoryImpl(source = get()) }
-    single<ArticlesInteractor> { ArticlesInteractor(repository = get()) }
+    single { ArticlesInteractor(repository = get()) }
     viewModel {
         MainScreenViewModel(interactor = get(), bookmarksInteractor = get())
     }

@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfetcher.R
 import com.example.newsfetcher.di.BUNDLE_KEY_FOR_ARTICLE_MODEL
 import com.example.newsfetcher.feature.detailednews.ui.DetailedNewsFragment
-import com.example.newsfetcher.feature.detailednews.ui.DetailedNewsFragment.Companion.newInstance
-import com.example.newsfetcher.feature.detailednews.ui.DetailedNewsViewModel
 import com.example.newsfetcher.feature.domain.ArticleModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,7 +36,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         recyclerView.adapter = adapter
 
         ivSearch.setOnClickListener {
-            viewModel.processUiEvent(com.example.newsfetcher.feature.mainscreen.UiEvent.OnSearchButtonClicked)
+            viewModel.processUiEvent(UiEvent.OnSearchButtonClicked)
         }
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -54,7 +52,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
 
             override fun afterTextChanged(text: Editable?) {
                 viewModel.processUiEvent(
-                    com.example.newsfetcher.feature.mainscreen.UiEvent.OnSearchEdit(
+                    UiEvent.OnSearchEdit(
                         text.toString()
                     )
                 )

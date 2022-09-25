@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
+        android:background="?attr/actionModeSplitBackground"
         android:id="@+id/rvBookmarkedArticles"
         />
     <!--    <TextView
