@@ -47,8 +47,11 @@ class MainScreenViewModel(
                 viewModelScope.launch {
                     bookmarksInteractor.create(previousState.articlesShown[event.index])
                 }
+
+
                 return null
             }
+
             is UiEvent.OnSearchButtonClicked -> {
                 return previousState.copy(
                     articlesShown = if (previousState.isSearchEnabled) previousState.articleList else previousState.articlesShown,
@@ -57,9 +60,9 @@ class MainScreenViewModel(
             }
             is UiEvent.OnSearchEdit -> {
                 return previousState.copy(articlesShown = previousState.articleList.filter {
-                    it.title.contains(
+                    it.title?.contains(
                         event.text
-                    )
+                    ) ?: false
                 })
             }
             else -> return null

@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val BASE_URL = "https://newsapi.org/"
 const val API_KEY = "4f26925b85824439a8d15410472beff9"
 const val APP_DATABASE = "APP_DATABASE"
+const val BUNDLE_KEY_FOR_ARTICLE_MODEL = "article"
 
 val networkModule = module {
 
